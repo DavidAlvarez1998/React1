@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [nombre, setNombre] = useState('');
+  const [edad, setEdad] = useState('');
+  const [usuario, setUsuario] = useState(null);
+
+  const handleAgregar = () => {
+    setUsuario({ nombre, edad });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="form-container">
+        <div className="form-group">
+          <label htmlFor="nombre">Nombre:</label>
+          <input 
+            type="text" 
+            id="nombre" 
+            value={nombre} 
+            onChange={(e) => setNombre(e.target.value)} 
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="edad">Edad:</label>
+          <input 
+            type="text" 
+            id="edad" 
+            value={edad} 
+            onChange={(e) => setEdad(e.target.value)} 
+          />
+        </div>
+        <button onClick={handleAgregar}>Agregar</button>
+        {usuario && (
+          <div className="usuario">
+            Usuario es "{usuario.nombre}", "{usuario.edad}"
+          </div>
+        )}
+      </div>
     </div>
   );
 }
